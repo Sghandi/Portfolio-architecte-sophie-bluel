@@ -186,3 +186,16 @@ footer nav ul {
 	margin: 2em
 }
 
+.galleryProjects img {
+	width: 353px;
+	display: block;
+}
+.galleryProjects {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+figcaption {
+	display: block;
+}
