@@ -186,16 +186,43 @@ footer nav ul {
 	margin: 2em
 }
 
-.galleryProjects img {
-	width: 353px;
-	display: block;
-}
-.galleryProjects {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
+/* Homepage */
+.filters-section {
+	display:flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+    padding-bottom: 20px;
+	margin-bottom: 1em;
 }
 
-figcaption {
-	display: block;
+.filters-section button {
+	border: solid #1D6154 1px;
+	border-radius: 20px;
+	padding: 6px 21px 6px 21px;
+	color: #1D6154;
+	font-family: 'Syne';
+    font-weight: 700;
+    font-size: 16px;
+	background-color: white;
+}
+
+button:focus {
+	/* color:#1D6154; */
+	background-color: #1D6154;
+	color: white;
+}
+
+#introduction {
+	padding-left: 51px;
+	padding-right: 100px;
+}
+
+#portfolio {
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+#portfolio p {
+	margin-top:5px;
 }
