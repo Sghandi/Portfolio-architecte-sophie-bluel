@@ -226,3 +226,93 @@ button:focus {
 #portfolio p {
 	margin-top:5px;
 }
+
+/* a {
+	text-decoration: none;
+} */
+
+.log-in h1 {
+	color:#1D6154;
+	text-align: center;
+	font-size: 30px;
+	font-weight: 700;
+	padding-top: 59px;
+
+}
+
+.form-log {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+	gap: 20px;
+	font-family: 'Syne';
+	color:#3D3D3D;
+	padding-right: 191px;
+}
+
+.mail, .mdp {
+	display: flex;
+	flex-direction: column;
+}
+
+form button {
+	border: solid #1D6154 1px;
+	border-radius: 20px;
+	padding: 6px 21px 6px 21px;
+	color: white;
+	font-family: 'Syne';
+    font-weight: 700;
+    font-size: 16px;
+	background-color: #1D6154;
+}
+
+html {
+	background-color: #E5E5E5;
+}
+
+.log-in input {
+	margin-top: 10px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	height: 48px;
+	width: 227%;
+	margin-left:0px;
+}
+
+footer a {
+	text-align: end;
+	color: black;
+}
+
+.footer-login {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: white;
+  }
+
+  a:visited {
+	color: black;
+  }
+
+  #mdp-lost a {
+	color: #3D3D3D;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+  }
+
+  .connection {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+	padding-top:35px
+	
+  }
+  header a {
+	text-decoration: none;
+  }
