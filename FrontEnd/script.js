@@ -76,3 +76,38 @@ for (let i = 0; i < filters.length; i++) {
     generateProjects(catFiltering);
   });
 }
+
+
+// Home edit
+function checkAuth() {
+  const token = localStorage.getItem('token');
+  const editButtons = document.querySelectorAll('.modification');
+  const loginLink = document.getElementById('login-link');
+
+  if (token) {
+    editButtons.forEach(button => button.style.display = 'block');
+    loginLink.innerHTML = '<a href="#">logout</a>';
+    loginLink.querySelector('a').addEventListener('click', function() {
+      // logout
+      localStorage.removeItem('token');
+      // Recharger la page
+      location.reload();
+    });
+
+
+    const filtersSection = document.querySelector('.filters-section');
+    if (filtersSection && filtersSection.parentNode) {
+      filtersSection.parentNode.removeChild(filtersSection);
+    }
+
+    filters.length = 0;
+    console.log(filters);
+  }
+   else {
+    editButtons.forEach(button => button.style.display = 'none');
+    loginLink.innerHTML = '<a href="login.html">login</a>';
+  }
+}
+
+// Appeler la fonction checkAuth à chaque chargement de la page
+window.addEventListener('load', checkAuth);

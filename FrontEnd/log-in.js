@@ -18,7 +18,7 @@ async function login(user) {
     localStorage.setItem('token', token);
     window.location.href="index.html";
   } else {
-    alert("Combinaison identifiant/mot de passe erronée");
+    alert("Erreur dans l’identifiant ou le mot de passe");
   }
   const token = localStorage.getItem('token');
 }
@@ -38,10 +38,3 @@ function addListenerConnection() {
     await login(user);
   });
 }
-
-
-
-
-
-
-
