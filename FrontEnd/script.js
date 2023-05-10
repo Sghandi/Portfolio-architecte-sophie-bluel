@@ -77,7 +77,6 @@ for (let i = 0; i < filters.length; i++) {
   });
 }
 
-
 // Home edit
 function checkAuth() {
   const token = localStorage.getItem('token');
