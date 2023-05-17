@@ -1,5 +1,5 @@
 
-// document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   
 let modal = null
 // const modalGalleryContainer = document.getElementById('modalGalleryContainer');
@@ -140,19 +140,6 @@ backButton.addEventListener('click', function () {
   modalGalleryContainer.style.display = "flex";
 });
 
-// Function to select file
-function handleFileButtonClick() {
-  document.getElementById('file-upload').click();
-}
-
-function handleFileSelection() {
-  const fileInput = document.getElementById('file-upload');
-  const selectedFiles = fileInput.files;
-  if (selectedFiles.length > 0) {
-    console.log('Fichier sélectionné:', selectedFiles[0].name);
-  }
-}
-
 
 // Function to close the modal
 const closeModal = function (e) {
@@ -175,4 +162,133 @@ const stopPropagation = function (e) {
 document.querySelectorAll('.js-modal').forEach(a => {
   a.addEventListener('click', openModal);
 });
-// })
+})
+
+// Function to handle the file button click
+const handleFileButtonClick = function () {
+  const fileInput = document.getElementById('file-upload');
+  fileInput.click();
+};
+
+// Function to handle the file selection
+const handleFileSelection = function () {
+  const fileInput = document.getElementById('file-upload');
+  const selectedFiles = fileInput.files;
+
+  if (selectedFiles) {
+    console.log('Fichier sélectionné:', selectedFiles[0].name);
+    const formData = new FormData(); 
+
+    // formData.append('image', file);
+
+    formData.append('image', selectedFiles[0]);
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const imageURL = event.target.result;
+      const imagePreview = document.getElementById('image-preview');
+      imagePreview.innerHTML = '<img src="' + imageURL + '" alt="Image preview" />';
+
+      // Pour supprimer l'icone, le paragraph et le button qd une image apparait
+
+    const deleteP = document.getElementById('modal-paragraph');
+    deleteP.style.display = 'none';
+    const deleteButtonImage = document.querySelector('.modal-form button');
+    deleteButtonImage.style.display = 'none';
+    const deleteIconeImage = document.querySelector('.fa-image');
+    deleteIconeImage.style.display = 'none';
+    const DeletePaddingDiv = document.querySelector('.grey-div');
+    DeletePaddingDiv.style.padding = '0';
+    const DeleteGapDiv = document.querySelector('.grey-div');
+    DeleteGapDiv.style.gap = '0';
+};
+
+reader.readAsDataURL(selectedFiles[0]);
+  }
+};
+
+// Function to validate the form
+const validateForm = function (formData) {
+  const title = formData.get('title');
+  const category = formData.get('categories');
+  const image = formData.get('image');
+
+  if (!title || !category || !image) {
+    return false; // Les champs obligatoires ne sont pas remplis
+  }
+
+  return true; // Tous les champs sont remplis
+};
+
+
+// Function to handle the form submission
+const handleSubmit = async function (e) {
+  e.preventDefault();
+
+  // Get the form data
+  const form = document.querySelector('.modal-form');
+  const formData = new FormData(form);
+
+  // Check if all required fields are filled
+  const title = formData.get('title');
+  const category = formData.get('categories');
+  const image = formData.get('image');
+
+  if (!title || !category || !image) {
+    displayErrorMessage('Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+
+  // Validate the form
+  if (!validateForm(formData)) {
+    // Display an error message if the form is not valid
+    displayErrorMessage('Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+
+  try {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+
+    const response = await fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the request header
+      },
+      body: formData,
+    });  
+
+    if (response.ok) {
+      // Clear the form fields
+      form.reset();
+
+      // Display a success message
+      displaySuccessMessage('Le projet a été ajouté avec succès.');
+    } else {
+      // Display an error message if the request fails
+      displayErrorMessage('Une erreur s\'est produite lors de l\'envoi du formulaire.');
+    }
+  } catch (error) {
+    console.log('Une erreur s\'est produite lors de l\'envoi du formulaire:', error);
+    displayErrorMessage('Une erreur s\'est produite lors de l\'envoi du formulaire.');
+  }
+};
+// Prevent the page from refreshing on form submission
+const form = document.querySelector('.modal-form');
+form.addEventListener('submit', handleSubmit);
+
+// Function to display an error message
+const displayErrorMessage = function (message) {
+  const errorMessageElement = document.querySelector('.error-message');
+  errorMessageElement.textContent = message;
+  errorMessageElement.style.display = 'block';
+};
+const displaySuccessMessage = function (message) {
+  const successMessageElement = document.querySelector('.success-message');
+  successMessageElement.textContent = message;
+  successMessageElement.style.display = 'block';
+};
+
+
+// Add event listener to the form submit button
+const submitButton = document.getElementById('submit-button');
+submitButton.addEventListener('click', handleSubmit);

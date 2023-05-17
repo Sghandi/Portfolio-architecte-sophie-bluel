@@ -64,38 +64,37 @@
 				<!-- <i class="fa-solid fa-trash-can"></i>  -->
 				<h1 id="titlemodal">Galerie photo</h1>
 				<!-- <i class="fa-solid fa-arrows-up-down-left-right"></i> -->
-				<form class="modal-form hidden" method="post">
+				<form class="modal-form hidden" method="POST" action="http://localhost:5678/api/works" enctype="multipart/form-data">
 					<div class="grey-div">
 						<i class="fa-solid fa-image"></i>
 						<label for="file-upload" class="custom-file-upload">
 							<button type="button" onclick="handleFileButtonClick()">+ Ajouter photo</button>
-						  	<input id="file-upload" type="file" accept="image/*" onchange="handleFileSelection()" />
+						  	<input id="file-upload" type="file" accept="image/*" name="image" onchange="handleFileSelection()" />
 						</label>
-						<!-- <div id="image-preview"></div> -->
-						<p>jpg, png : 4mo max</p>
+						<div id="image-preview"></div>
+						<p id="modal-paragraph">jpg, png : 4mo max</p>
 					</div>
 					<div class="form-container">
 						<label for="name">Titre</label>
-						<input type="text" id="name" name="user_name">
-						<label for="catégories">Catégories</label>
-						<select name="Catégories">
+						<input type="text" id="name" name="title">
+						<label for="categories">Catégories</label>
+						<select name="categories"  id="categories">
 							<option value=""></option>
-							<option value="">Objets</option>
-							<option value="">Appartements</option>
-							<option value="">Hôtels & Restaurants</option>
+							<option value="objets">Objets</option>
+							<option value="appartements">Appartements</option>
+							<option value="hotels">Hôtels & Restaurants</option>
 						</select>
 					</div>
+					<div class="error-message"></div>
+					<div class="success-message"></div>
+
+					<button  id="submit-button" class="hidden" type="button">Envoyer</button>
 				</form>
 
 				<div id="modalGalleryContainer"></div>
 				<div class="border"></div>
-				<button  id="submit-button" class="hidden" type="submit">Envoyer</button>
-
 				<button id="add-image">Ajouter une photo</button>
-				
 				<a href="#">Supprimer la galerie</a>
-				
-				
 			</div>
 		</aside>
 

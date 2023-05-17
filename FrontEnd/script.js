@@ -47,7 +47,7 @@ Promise.all([fetchCategories(), fetchWorks()])
     // Assign works to the global variable
     works = worksData;
 
-    // Generate initial projects
+    // Generate projects
     generateProjects(works);
 
     // Add event listeners to filter buttons

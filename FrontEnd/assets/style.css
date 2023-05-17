@@ -693,3 +693,9 @@ a:visited {
 #edit-black {
 	display: flex;
 }
+
+#image-preview img {
+    top: 193px;
+    right: 586px;
+    height: 166px;
+}
