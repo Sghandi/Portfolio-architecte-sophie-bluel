@@ -50,27 +50,28 @@ Promise.all([fetchCategories(), fetchWorks()])
     // Generate projects
     generateProjects(works);
 
-    // Add event listeners to filter buttons
-    const filtersSection = document.querySelector('.filters-section');
-    const filterButtons = filtersSection.querySelectorAll('button');
+    document.addEventListener('DOMContentLoaded', function () {
+      // Add event listeners to filter buttons
+      const filtersSection = document.querySelector('.filters-section');
+      const filterButtons = filtersSection.querySelectorAll('button');
 
-    for (let i = 0; i < filterButtons.length; i++) {
-      filterButtons[i].addEventListener('click', () => {
-        let filteredWorks = [];
+      for (let i = 0; i < filterButtons.length; i++) {
+        filterButtons[i].addEventListener('click', () => {
+          let filteredWorks = [];
 
-        if (i === 0) {
-          // "Tous" button is clicked, show all works
-          filteredWorks = works;
-        } else {
-          // Category button is clicked, filter works based on category ID
-          filteredWorks = works.filter((work) => work.categoryId === i);
-        }
+          if (i === 0) {
+            // "Tous" button is clicked, show all works
+            filteredWorks = works;
+          } else {
+            // Category button is clicked, filter works based on category ID
+            filteredWorks = works.filter((work) => work.categoryId === i);
+          }
 
-        generateProjects(filteredWorks);
-      });
-    }
+          generateProjects(filteredWorks);
+        });
+      }
+    });
   });
-
 
 /**
  * Checks the authentication status and updates the UI accordingly.
