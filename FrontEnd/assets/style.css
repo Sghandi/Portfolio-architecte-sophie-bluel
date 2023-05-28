@@ -695,8 +695,8 @@ a:visited {
 }
 
 #image-preview img {
-    top: 193px;
-    right: 586px;
+    /* top: 193px;
+    right: 586px; */
     height: 166px;
 }
 

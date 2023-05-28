@@ -30,6 +30,7 @@ function generateProjects(works) {
 
   for (let i = 0; i < works.length; i++) {
     const articleElement = document.createElement("article");
+    articleElement.setAttribute("data-id", works[i].id);
     const textElement = document.createElement("p");
     textElement.textContent = works[i].title;
     const imageElement = document.createElement("img");
@@ -50,7 +51,7 @@ Promise.all([fetchCategories(), fetchWorks()])
     // Generate projects
     generateProjects(works);
 
-    document.addEventListener('DOMContentLoaded', function () {
+    // document.addEventListener('DOMContentLoaded', function () {
       // Add event listeners to filter buttons
       const filtersSection = document.querySelector('.filters-section');
       const filterButtons = filtersSection.querySelectorAll('button');
@@ -70,7 +71,7 @@ Promise.all([fetchCategories(), fetchWorks()])
           generateProjects(filteredWorks);
         });
       }
-    });
+    // });
   });
 
 /**

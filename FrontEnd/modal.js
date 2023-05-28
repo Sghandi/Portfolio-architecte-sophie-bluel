@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   let modal = null
-  // const modalGalleryContainer = document.getElementById('modalGalleryContainer');
 
   // Function to open the modal
   const openModal = function (e) {
@@ -45,58 +44,56 @@ document.addEventListener('DOMContentLoaded', function () {
       buttonElement.classList.add("delete-button");
       buttonElement.dataset.imageId = works[i].id;
 
-      // Add event listener to handle work deletion
-      buttonElement.addEventListener('click', async function (event) {
-        event.preventDefault();
-        // const imageId = parseInt(event.target.dataset.imageId);
-        // buttonElement.dataset.imageId = parseInt(works[i].id);
-        const imageId = parseInt(works[i].id);
+
+  // Add event listener to handle work deletion
+  buttonElement.addEventListener('click', async function (event) {
+    event.preventDefault();
+    const imageId = parseInt(works[i].id);
 
 
-
-        const token = localStorage.getItem('token');
-        if (token) {
-          // Async function to delete work
-          async function deleteWork() {
-            try {
-              console.log(imageId)
-              const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
-                method: 'DELETE',
-                headers: {
-                  'Accept': '*/*',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + token
-                },
-                
-              });
-              // if (response.status === 200) {
-              if (response.ok) {
-                // Remove the corresponding work element from the DOM
-                const workElement = event.target.parentNode;
-                if (workElement) {
-                  workElement.remove();
-                  console.log("Le travail a été supprimé avec succès")
-                  location.reload();
-                } else {
-                  console.log("Le travail à supprimer n'a pas été trouvé dans le DOM");
-                  
-                }
-              } 
-              else {
-                console.log('Erreur lors de la suppression du travail');
-              }
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Async function to delete work
+      async function deleteWork() {
+        try {
+          console.log(imageId)
+          const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+            method: 'DELETE',
+            headers: {
+              'Accept': '*/*',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            },
+            
+          });
+          if (response.ok) {
+            // Remove the corresponding work element from the DOM
+            const workElement = event.target.parentNode;
+            if (workElement) {
+              workElement.remove();
+              console.log("Le travail a été supprimé avec succès")
+              location.reload();
+            } else {
+              console.log("Le travail à supprimer n'a pas été trouvé dans le DOM");
+              
             }
-            catch (error) {
-              console.log('Une erreur s\'est produite lors de la suppression du travail:', error);
-            }
+          } 
+          else {
+            console.log('Erreur lors de la suppression du travail');
           }
-
-          deleteWork(); // Appelle la fonction deleteWork pour effectuer la requête DELETE
-        } else {
-          console.log('Token non trouvé. Vous devez être connecté pour supprimer un travail.');
         }
-      });
+        catch (error) {
+          console.log('Une erreur s\'est produite lors de la suppression du travail:', error);
+        }
+      }
 
+      deleteWork(); // Appelle la fonction deleteWork pour effectuer la requête DELETE
+    } else {
+      console.log('Token non trouvé. Vous devez être connecté pour supprimer un travail.');
+    }
+  });
+
+////////////////////////////////////////////////////////////////////////////////////
       const imageElement = document.createElement("img");
       imageElement.src = works[i].imageUrl;
 
@@ -128,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
     modalTitleElement.textContent = "Ajout photo";
     deleteGalleryLink.style.display = "none";
     backButton.style.display = "block";
-    // addImageButton.style.display = 'none';
     addImageButton.classList.add('hidden');
     submitButton.classList.remove('hidden');
     modalGalleryContainer.style.display = "none";
@@ -137,14 +133,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const modalGallery = document.querySelector('#modalGallery');
 
   backButton.addEventListener('click', function () {
-    // modalGallery.scrollIntoView({ behavior: 'smooth' });
     formElement.classList.add('hidden');
     modalTitleElement.textContent = "Galerie photo";
     deleteGalleryLink.style.display = "inline";
     backButton.style.display = "none";
     addImageButton.classList.remove('hidden');
     submitButton.classList.add('hidden');
-    // modalGalleryContainer.classList.add('hidden');
     modalGalleryContainer.style.display = "flex";
   });
 
@@ -247,16 +241,12 @@ const handleSubmit = async function (e) {
     const response = await fetch('http://localhost:5678/api/works', {
       method: 'POST',
       headers: {
-        // 'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${token}`, // Include the token in the request header
+      Authorization: `Bearer ${token}`, // Include the token in the request header
       },
       body: formData,
     });
 
     if (response.ok) {
-      // Clear the form fields
-      // form.reset();
-
       // Display a success message
       displaySuccessMessage('Le projet a été ajouté avec succès.');
 
